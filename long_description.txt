@@ -1,0 +1,24 @@
+<style type="text/css">
+    .TFtable{
+        width:100%; 
+        border-collapse:collapse; 
+    }
+    .TFtable td{ 
+        padding:2px;
+        border:#AAAAAA 1px solid;
+    }
+    /* provide some minimal visual accomodation for IE8 and below */
+    .TFtable tr{
+        background: #CCCCCC;
+    }
+    /*  Define the background color for all the ODD background rows  */
+    .TFtable tr:nth-child(odd){ 
+        background: #CCCCCC;
+    }
+    /*  Define the background color for all the EVEN background rows  */
+    .TFtable tr:nth-child(even){
+        background: #FFFFFF;
+    }
+</style>
+
+The <b>i.MX6 SoloX SabreSD</b> Board board for smart devices simplifies product design with a low-cost, feature-rich development platform that allows developers to work with the majority of the processor’s primary features with the corresponding software support.

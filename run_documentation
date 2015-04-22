@@ -1,0 +1,28 @@
+#!/bin/bash
+
+YOCTO_VERSION=`git branch -a | grep "*" | awk -F" " '{print $2}'`
+BOARD_ALIAS=`cat name.txt | tr [:upper:] [:lower:] | tr ' ' '-'`
+WGET_TIMEOUT=5
+
+function firefox_offline()
+{
+    local HTML
+    HTML=`find ../docs -name index.html`
+    zenity --error --text "Impossible to connect to internet. We will open the offline documentation.\nThis may not be the last version."
+    firefox ${HTML}
+}
+
+cd libsh
+git pull
+[ $? -eq 0 ] || { cd ..; firefox_offline; exit 0; }
+source lib.sh
+cd ..
+URL_DOWNLOAD=$(get_url_download)
+
+wget --timeout=${WGET_TIMEOUT} ${URL_DOWNLOAD}/${BOARD_ALIAS}/sdk/${YOCTO_VERSION}/getdoc.txt
+[ $? -eq 0 ] || { rm -f getdoc.txt; firefox_offline; exit 0; }
+URL=`grep "SITE=" getdoc.txt | awk -F"=" '{print $2}'`
+rm getdoc.txt
+firefox ${URL}
+
+exit 0

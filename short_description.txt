@@ -1,0 +1,1 @@
+SABRE Board for Smart Devices Reference Design Based on the i.MX 6 Series.
