@@ -87,7 +87,7 @@ then
     repo init -u https://github.com/architech-boards/imx6sxsabresd-manifest.git -b ${RELEASE} -m manifest.xml > /dev/null 2>&1
     [ $? -eq 0 ] || { rm -rf .repo; internet_error; }
 fi
-repo sync > /dev/null 2>&1
+repo sync
 source poky/oe-init-build-env
 
 ###########################################################################################################
@@ -277,6 +277,9 @@ cd $ROOT_DIRECTORY
 killall eclipse
 killall qtcreator
 
+if [ -f force_sdk_install ]
+then
+
 get_remote_version ${URL_DOWNLOAD}/imx6sxsabresd/sdk/${RELEASE}
 LOCAL_VERSION=`grep "sdk" conf/versions | awk -F":" '{print $2}'`
 debecho "LOCAL_VERSION of sdk is ${LOCAL_VERSION}"
@@ -398,6 +401,8 @@ do
 		[ -f conf/sdk.txt ] && { mv conf/sdk.txt conf/sdk.txt.old; }
 		sed -i "s|sdk:$((LOCAL_VERSION-1))|sdk:${LOCAL_VERSION}|g" conf/versions
 done
+
+fi
 
 ###########################################################################################################
 # Installing documentation
