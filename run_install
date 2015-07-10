@@ -43,6 +43,9 @@ YOCTO_DIRECTORY="yocto"
 cd ..
 ROOT_DIRECTORY=`pwd`
 BASEROOT_SDK=${ROOT_DIRECTORY}
+cd ..
+ARCHITECH_DIRECTORY=`pwd`
+cd ${ROOT_DIRECTORY}
 NR_CPUS=`grep -c ^processor /proc/cpuinfo`
 DEFAULT_MACHINE="imx6sxsabresd"
 WGET_TIMEOUT=60
@@ -118,8 +121,8 @@ CONF_VERSION = "1"
 BB_NUMBER_THREADS = '6'
 PARALLEL_MAKE = '-j 6'
 
-DL_DIR ?= "/home/architech/architech_sdk/downloads/"
-SSTATE_DIR = "/home/architech/architech_sdk/sstate-cache/"
+DL_DIR ?= "${ARCHITECH_DIRECTORY}/downloads/"
+SSTATE_DIR = "${ARCHITECH_DIRECTORY}/sstate-cache/"
 ACCEPT_FSL_EULA = "1"
 PREFERRED_PROVIDER_virtual/mesa = ""
 
